@@ -1,5 +1,5 @@
 // 파일을 고치면 이 버전 숫자를 올려요 (기록 저장 이름은 그대로)
-const CACHE_NAME = 'my-app-yakkok-v4';
+const CACHE_NAME = 'my-app-yakkok-v5';
 const FILES = [
   './',
   './index.html',

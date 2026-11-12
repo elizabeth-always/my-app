@@ -35,7 +35,17 @@ html, body {
   -webkit-tap-highlight-color: transparent;
 }
 
-button { font: inherit; cursor: pointer; border: 0; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+body { overscroll-behavior-y: none; }
+
+button {
+  font: inherit;
+  cursor: pointer;
+  border: 0;
+  touch-action: manipulation;
+  -webkit-user-select: none;
+  user-select: none;
+}
 h1, h2, p { margin: 0; }
 svg { display: block; }
 
@@ -339,7 +349,15 @@ svg { display: block; }
 .btn-big:active { background: var(--primary-press); transform: scale(0.99); }
 .big-main { font-size: 27px; font-weight: 800; display: flex; align-items: center; gap: 8px; }
 .big-main .ic { width: 28px; height: 28px; color: #fff; }
-.big-sub { font-size: 16px; opacity: 0.95; }
+.big-sub {
+  font-size: 16px;
+  opacity: 0.95;
+  max-width: 100%;
+  padding: 0 24px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 .all-done {
   min-height: 88px;
   border-radius: 999px;
@@ -366,7 +384,8 @@ svg { display: block; }
   justify-content: center;
   gap: 6px;
 }
-.btn-small .ic { width: 20px; height: 20px; }
+.btn-small { white-space: nowrap; padding: 0 8px; }
+.btn-small .ic { width: 20px; height: 20px; flex: none; }
 .btn-small:active { background: var(--soft); }
 
 .navbar {
@@ -401,6 +420,29 @@ svg { display: block; }
 }
 .nav-btn.is-on { color: var(--primary); }
 .nav-btn.is-on svg { fill: var(--soft); }
+.nav-btn:active { background: var(--bg); }
+
+/* ───── 휴대폰 최적화 ───── */
+/* 폭이 좁은 휴대폰: 작은 버튼 글자를 한 줄로 */
+@media (max-width: 400px) {
+  .btn-small { font-size: 17px; }
+  .btn-small .ic { display: none; }
+  .hello h1 { font-size: 30px; }
+  .hello-art { width: 88px; height: 74px; }
+}
+
+/* 키가 작은 휴대폰(아이폰 SE 등): 아래쪽이 화면을 덜 가리게 */
+@media (max-height: 740px) {
+  .view { gap: 12px; }
+  .take { padding-top: 8px; padding-bottom: 8px; }
+  .btn-big, .all-done { min-height: 76px; }
+  .big-main { font-size: 25px; }
+  .small-row { margin-top: 8px; }
+  .btn-small { min-height: 48px; }
+  .navbar { padding-top: 4px; padding-bottom: calc(4px + env(safe-area-inset-bottom)); }
+  .nav-btn { min-height: 56px; }
+  .nav-btn svg { width: 26px; height: 26px; }
+}
 
 /* ───── 성분 · 목표 ───── */
 .notice {
@@ -459,6 +501,7 @@ input {
   color: var(--text);
 }
 input:focus { outline: none; border-color: var(--primary); }
+input[type="search"] { -webkit-appearance: none; appearance: none; }
 input::placeholder { color: #8A6F7D; }
 .btn-x {
   min-height: 48px;

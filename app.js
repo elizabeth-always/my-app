@@ -375,11 +375,14 @@ function renderProductEditor() {
   $('productEditor').innerHTML = productList().map((p) => {
     const rows = (products[p.name] || []).map((ing, i) => `<div class="ing-row">
         <input class="in-name" data-product="${esc(p.name)}" data-index="${i}" data-field="name"
-          value="${esc(ing.name || '')}" placeholder="성분 이름" aria-label="${esc(p.name)} 성분 이름">
+          value="${esc(ing.name || '')}" placeholder="성분 이름" aria-label="${esc(p.name)} 성분 이름"
+          autocomplete="off" enterkeyhint="next">
         <input class="in-amount" data-product="${esc(p.name)}" data-index="${i}" data-field="amount"
-          value="${esc(ing.amount || '')}" placeholder="양 (숫자)" inputmode="decimal" aria-label="양">
+          value="${esc(ing.amount || '')}" placeholder="양 (숫자)" inputmode="decimal" aria-label="양"
+          autocomplete="off" enterkeyhint="next">
         <input class="in-unit" data-product="${esc(p.name)}" data-index="${i}" data-field="unit"
-          value="${esc(ing.unit || '')}" placeholder="단위 (mg 등)" list="units" aria-label="단위">
+          value="${esc(ing.unit || '')}" placeholder="단위 (mg 등)" list="units" aria-label="단위"
+          autocomplete="off" enterkeyhint="done">
         <button type="button" class="btn-x" data-remove-ing="${esc(p.name)}" data-index="${i}" aria-label="이 성분 지우기">✕</button>
       </div>`).join('');
     return `<div class="product">
@@ -397,6 +400,7 @@ function renderGoalEditor() {
     ? groups.map((g) => `<div class="goal-row">
         <span class="goal-name">${esc(g.name)}</span>
         <input data-goal="${esc(g.key)}" value="${esc(goals[g.key] || '')}" placeholder="목표" inputmode="decimal"
+          autocomplete="off" enterkeyhint="done"
           aria-label="${esc(g.name)} 하루 목표">
         <span class="goal-unit">${esc(g.unit)}</span>
       </div>`).join('')
